@@ -1,0 +1,190 @@
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+
+" Vundle vundles
+Plugin 'VundleVim/Vundle.vim'
+Plugin 'ap/vim-css-color'
+Plugin 'hail2u/vim-css3-syntax'
+Plugin 'groenewege/vim-less'
+Plugin 'mustache/vim-mustache-handlebars'
+Plugin 'scrooloose/nerdtree'
+
+
+Plugin 'onsails/lspkind-nvim'
+Plugin 'L3MON4D3/LuaSnip'
+Plugin 'hrsh7th/cmp-nvim-lsp'
+Plugin 'hrsh7th/cmp-buffer'
+Plugin 'hrsh7th/nvim-cmp'
+
+Plugin 'tpope/vim-fugitive'
+Plugin 'airblade/vim-gitgutter'
+Plugin 'neovim/nvim-lspconfig'
+Plugin 'nvim-lualine/lualine.nvim'
+" Plugin 'vim-airline/vim-airline'
+Plugin 'junegunn/fzf'
+" Plugin 'vim-airline/vim-airline-themes'
+Plugin 'w0rp/ale'
+Plugin 'jacoborus/tender'
+Plugin 'alunny/pegjs-vim'
+Plugin 'rust-lang/rust.vim'
+Plugin 'kyazdani42/nvim-web-devicons'
+Plugin 'SirVer/ultisnips'
+Plugin 'honza/vim-snippets'
+Plugin 'preservim/nerdcommenter'
+Plugin 'mhinz/vim-startify'
+Plugin 'neoclide/coc.nvim', {'branch': 'release'}
+Plugin 'dag/vim-fish'
+Plugin 'sgur/vim-editorconfig'
+Plugin 'pangloss/vim-javascript'
+Plugin 'digitaltoad/vim-pug'
+Plugin 'leafgarland/typescript-vim'
+Plugin 'kristijanhusak/vim-hybrid-material'
+Plugin 'keith/swift.vim'
+Plugin 'mbbill/undotree'
+Plugin 'posva/vim-vue'
+Plugin 'Quramy/tsuquyomi'
+Plugin 'Shougo/vimproc.vim'
+
+" End Vundle
+call vundle#end()
+filetype plugin indent on
+
+" Tabs
+set tabstop=4
+set shiftwidth=4
+set expandtab
+
+au FileType make setlocal noexpandtab
+
+" Override editorconfig
+" We add the BufReadPost, BufNewFile autocmds in VimEnter so that they run
+" after the plugin runs (apparently the events are not added at this point
+" in vimrc). Also set it right in VimEnter since it fires after Buf autocmds
+au VimEnter * set tabstop=2 shiftwidth=2|au BufReadPost,BufNewFile * set tabstop=2 shiftwidth=2 
+
+" Indent
+" set autoindent
+set smartindent
+
+" Editorconfig 
+let g:editorconfig_blacklist = {'filetype': ['git.*']}
+
+" Misc
+set inccommand=split
+set incsearch
+" set mouse=a
+set hidden " allow switching from unsaved buffers to others
+let $FZF_DEFAULT_COMMAND = 'ag -g ""'
+
+" Editor features
+set cursorline
+set number
+
+" Visuals
+syntax on
+" set termguicolors
+set background=dark
+colorscheme hybrid_material
+hi VertSplit ctermbg=235 ctermfg=235
+set go-=L " remove left scrollbar
+set go-=r " remove right scrollbar
+
+let g:vue_disable_pre_processors=1
+
+" Visuals: ALE
+highlight ALEWarningSign guifg=#f0f166
+highlight ALEErrorSign guifg=#ff4d47
+let g:ale_sign_error = '✖︎'
+let g:ale_sign_warning = '⚠'
+
+" Visuals: airline
+"let g:airline_left_sep = ''
+"let g:airline_right_sep = ''
+
+"let g:airline_powerline_fonts = 1 " https://github.com/bling/vim-airline/wiki/FAQ
+"let g:airline#extensions#whitespace#enabled = 0 " too obtrusive
+"let g:airline_theme = "tender"
+"let g:airline#extensions#tabline#enabled = 1
+"let g:airline#extensions#tabline#buffer_nr_show = 1
+"let g:airline#extensions#tabline#buffer_nr_format = "%s:"
+"let g:airline#extensions#hunks#enabled = 0 " no room :(
+"let g:airline_section_y = '' " no room :'(
+"let g:airline#extensions#syntastic#enabled = 1
+"let g:airline#extensions#branch#enabled = 0 " just nevever found it that useful :/
+
+" Visuals: gitgutter
+hi SignColumn guibg=#222222
+hi GitGutterAdd guibg=#222222 guifg=#afd702
+hi GitGutterDelete guibg=#222222 guifg=#ff4d47
+hi GitGutterChange guibg=#222222 guifg=#0087af
+hi GitGutterChangeDelete guibg=#222222 guifg=#0087af
+
+set laststatus=2
+
+set nocompatible            " disable compatibility to old-time vi
+set showmatch               " show matching 
+set ignorecase              " case insensitive 
+set mouse=v                 " middle-click paste with 
+set hlsearch                " highlight search 
+set incsearch               " incremental search
+" set tabstop=4               " number of columns occupied by a tab 
+set softtabstop=4           " see multiple spaces as tabstops so <BS> does the right thing
+" set expandtab               " converts tabs to white space
+set shiftwidth=4            " width for autoindents
+set autoindent              " indent a new line the same amount as the line just typed
+" set number                  " add line numbers
+set wildmode=longest,list   " get bash-like tab completions
+set cc=80                  " set an 80 column border for good coding style
+" filetype plugin indent on   "allow auto-indenting depending on file type
+" syntax on                   " syntax highlighting
+set mouse=a                 " enable mouse click
+set clipboard=unnamedplus   " using system clipboard
+filetype plugin on
+" set cursorline              " highlight current cursorline
+set ttyfast                 " Speed up scrolling in Vim
+" set spell                 " enable spell check (may need to download language package)
+" set noswapfile            " disable creating swap file
+" set backupdir=~/.cache/vim " Directory to store backup files.
+
+" Maps
+nmap <C-o> :FZF<CR>
+autocmd FileType typescript nmap <buffer> <Leader>t : <C-u>echo tsuquyomi#hint()<CR>
+
+" open new split panes to right and below
+set splitright
+set splitbelow
+
+ " move line or visually selected block - alt+j/k
+inoremap <A-j> <Esc>:m .+1<CR>==gi
+inoremap <A-k> <Esc>:m .-2<CR>==gi
+vnoremap <A-j> :m '>+1<CR>gv=gv
+vnoremap <A-k> :m '<-2<CR>gv=gv
+" move split panes to left/bottom/top/right
+ nnoremap <A-h> <C-W>H
+ nnoremap <A-j> <C-W>J
+ nnoremap <A-k> <C-W>K
+ nnoremap <A-l> <C-W>L
+" move between panes to left/bottom/top/right
+ nnoremap <C-h> <C-w>h
+ nnoremap <C-j> <C-w>j
+ nnoremap <C-k> <C-w>k
+ nnoremap <C-l> <C-w>l
+
+" Press i to enter insert mode, and ii to exit insert mode.
+:inoremap ii <Esc>
+:inoremap jk <Esc>
+:inoremap kj <Esc>
+:vnoremap jk <Esc>
+:vnoremap kj <Esc>
+
+" open file in a text by placing text and gf
+nnoremap gf :vert winc f<cr>
+" copies filepath to clipboard by pressing yf
+:nnoremap <silent> yf :let @+=expand('%:p')<CR>
+" copies pwd to clipboard: command yd
+:nnoremap <silent> yd :let @+=expand('%:p:h')<CR>
+" Vim jump to the last position when reopening a file
+if has("autocmd")
+  au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$")
+    \| exe "normal! g'\"" | endif
+endif
