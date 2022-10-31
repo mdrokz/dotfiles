@@ -110,6 +110,9 @@ keymap.set("n","<C-up>",":m .-2<CR>==")
 keymap.set("v","<C-down>",">+1<CR>gv=gv")
 keymap.set("v","<C-up>","<-2<CR>gv=gv")
 
+-- open neogit
+keymap.set("n","<Leader>g","<Cmd>Neogit<CR>")
+
 local function split(inputstr, sep)
    if sep == nil then
       sep = "%s"
