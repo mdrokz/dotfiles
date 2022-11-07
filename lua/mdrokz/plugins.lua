@@ -13,6 +13,7 @@ packer.startup(function(use)
   --  requires = { 'tjdevries/colorbuddy.nvim' }
   --}
   use 'shaunsingh/nord.nvim'
+  use "rafamadriz/friendly-snippets"
   use 'nvim-lualine/lualine.nvim' -- Statusline
   use 'nvim-lua/plenary.nvim' -- Common utilities
   use 'onsails/lspkind-nvim' -- vscode-like pictograms
@@ -34,6 +35,10 @@ packer.startup(function(use)
     }
   }
 
+  use {
+      'stevearc/aerial.nvim',
+      config = function() require('aerial').setup() end
+    }
   use { 'TimUntersberger/neogit', requires = 'nvim-lua/plenary.nvim' }
 
   use {'terrortylor/nvim-comment', run = function() require('nvim_comment.install').setup({line_mapping = "<C-_>",operator_mapping = "<C-_>",comment_chunk_text_object = "ic"}) end,}
