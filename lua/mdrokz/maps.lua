@@ -113,28 +113,3 @@ keymap.set("v","<C-up>","<-2<CR>gv=gv")
 -- open neogit
 keymap.set("n","<Leader>g","<Cmd>Neogit<CR>")
 
-local function split(inputstr, sep)
-   if sep == nil then
-      sep = "%s"
-   end
-   local t={}
-   for str in string.gmatch(inputstr, "([^"..sep.."]+)") do
-      table.insert(t, str)
-   end
-   return t
-end
-
--- open neo tree with current directory
-function OpenNeoTree()
-  -- get current directory
-  local x = vim.cmd("ls")
-
-  local y = split(x,"\"\"")
-  --local handle = io.popen("pwd")
-  --local result = handle:read("*a")
-  local dir = io.read("*a")
-  print(dir,vim.inspect(y))
-  -- open Neotreee with the directory
-  --vim.api.nvim_command("pwd | Neotree")
-end
-
