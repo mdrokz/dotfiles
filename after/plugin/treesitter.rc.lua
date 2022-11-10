@@ -14,6 +14,8 @@ ts.setup {
     "tsx",
     "toml",
     "fish",
+    "rust",
+    "c",
     "php",
     "json",
     "yaml",
