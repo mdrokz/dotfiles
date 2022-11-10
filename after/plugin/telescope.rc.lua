@@ -50,7 +50,7 @@ vim.keymap.set('n', ';f',
     })
   end)
 
-vim.keymap.set('n',';l', function() 
+vim.keymap.set('n',';l', function()
   builtin.treesitter()
 end)
 
@@ -63,6 +63,27 @@ end)
 vim.keymap.set('n', ';t', function()
   builtin.help_tags()
 end)
+
+vim.keymap.set('n', ';q', function()
+  builtin.quickfix()
+end)
+
+vim.keymap.set('n','fr',function()
+  builtin.lsp_references()
+end)
+
+vim.keymap.set('n','fd',function()
+  builtin.lsp_definitions()
+end)
+
+vim.keymap.set('n','fi',function()
+  builtin.lsp_implementations()
+end)
+
+vim.keymap.set('n',';g',function()
+  builtin.git_commits()
+end)
+
 vim.keymap.set('n', ';;', function()
   builtin.resume()
 end)
